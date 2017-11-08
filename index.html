@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>2 Min App</title>
+<style type="text/css">
+html,body { padding: 0px; margin: 0px; height: 100%; }
+body {
+    background-color: rgba(255, 120, 192, 0.3);
+}
+#container {
+    margin: 0px;
+    height:100%;
+}
+
+h2 {
+    margin-top: 0px;
+    padding-top: 34px;
+}
+#title {
+    color: white;
+    font-size: 2.6em;
+    text-align: center;
+}
+
+#input-area {
+    margin: 0 auto;
+    width: 80%;
+    position: relative;
+    bottom: 0px;
+}
+#command {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px #ccc solid;
+    background-color: transparent;
+    font-size: 2.3em;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input:focus {
+    outline: 0;
+}
+
+#list {
+    margin: 0 auto;
+    width: 80%;
+    height: 65%;
+    background: rgba(255,255,255,0.7);
+    border: 2px black solid;
+    border-radius: 2%;
+    font-size: 1.8em;
+}
+</style>
+  </head>
+  <body>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    <div id="container">
+    <h2 id="title"> 2 Min APP </h2>
+    <ul id="list">
+    </ul>
+    <div id="input-area">
+        <input type="text" id="command" />
+    </div>
+    </div>
+
+    <script>
+      // You can also require other files to run in this process
+        require('./renderer.js')
+    </script>
+    <script src="./index.js"></script>
+  </body>
+</html>
