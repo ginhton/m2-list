@@ -7,9 +7,9 @@ var commandNode = document.getElementById("command");
 
 // configeration parameters
 var STORAGE_SUPPORT = false;
+
+
 document.addEventListener("DOMContentLoaded", function() {
-  // code...
-    // alert("hello");
     STORAGE_SUPPORT = typeof("Storage") !== 'undefined';
     document.addEventListener("keypress", key, false);
     commandNode.focus();
@@ -19,20 +19,13 @@ function key (e) {
     if (e.keyCode == 13) {
         // run
         extractCommand();
-        // var command = document.getElementById("command");
         commandNode.value = "";
     }
 }
 
 function run() {
-    // var btn = document.getElementById("btn");
     btn.addEventListener("click", extractCommand);
 }
-
-// function test() {
-    // var command = document.getElementById("command").value;
-    // alert(command);
-// }
 
 function extractCommand() {
 
@@ -65,15 +58,15 @@ function extractCommand() {
         case "clear":
             clear();
             break;
+        case "help":
+            help();
+            break;
         default:
             nothing();
     }
 
 }
 
-function command(command) {
-    add(extractCommand(command));
-}
 
 // 1-layer command
 function add(item) {
@@ -89,7 +82,6 @@ function list() {
         return;
     }
     for(var idx in items) {
-        // item.list();
         show(items[idx]);
     }
 }
@@ -111,6 +103,19 @@ function done(item) {
     items.splice(current, 1);
     current = -1;
     clearAndShow("item has been done.");
+}
+
+function help() {
+    clearUl();
+    show("help: show command usage")
+    show("add task: task can be something like 'drink water' or 'listen to music' (without quotes)")
+    show("list: get a list of what you added before")
+    show("get: randomly choose one item from list and display. you can rerun `get` to change current item.")
+    show("done: mark current item done and remove it from list")
+    show("clear: remove all the items in your list")
+    show("save: save current list in local storage")
+    show("restore: restore list from local storage. This will override current list.")
+    current = -1
 }
 
 function nothing() {
