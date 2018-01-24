@@ -4,6 +4,8 @@ var current = -1;
 var btn = document.getElementById("btn");
 var commandNode = document.getElementById("command");
 
+const remote = require('electron').remote;
+
 
 // configeration parameters
 var STORAGE_SUPPORT = false;
@@ -58,6 +60,9 @@ function extractCommand() {
         case "clear":
             clear();
             break;
+        case "quit":
+            quit();
+            break;
         case "help":
             help();
             break;
@@ -103,6 +108,11 @@ function done(item) {
     items.splice(current, 1);
     current = -1;
     clearAndShow("item has been done.");
+}
+
+function quit() {
+    var window = remote.getCurrentWindow();
+    window.close();
 }
 
 function help() {
