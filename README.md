@@ -7,8 +7,10 @@
   When I start to work, there are so many things appearing in my mind. I just write them down and continue my work. After doing that, I have a list. And this application helps me record such things and give me one randomly to do. Then I choose to do it or just get another list item.
 
 ## Quick-start
-- You can [download the Windows release](https://github.com/ginhton/m2-list/releases/download/v0.1/m2-windows.exe).
-- You can [download the Linux release](https://github.com/ginhton/m2-list/releases/download/v0.1/m2-linux.AppImage).
+- You can [download the Windows release](https://github.com/ginhton/m2-list/releases/download/v0.1a/m2-Windows.exe).
+- You can [download the Linux release](https://github.com/ginhton/m2-list/releases/download/v0.1a/m2-Linux.AppImage
+## 2 Note
+.
 - Clone the repo: `git clone https://github.com/ginhton/m2-list.git`
 
 ## Commands available
