@@ -31,7 +31,7 @@
   },
   "author": "ginhton",
   "devDependencies": {
-    "electron": "1.7.9",
+    "electron": "1.7.11",
     "electron-builder": "^19.43.4"
   }
 }

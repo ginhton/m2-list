@@ -1,9 +1,17 @@
-# m2-list
-This is a small todo-list application. It is built by electron. 
-I build this from **electron-quick-start** repo, and use a lot of code in that repo.
-# idea of this application
-When you start to work, there are so many things appear in your mind. So you can just write them down and continue your work. After that, you have a list, and this application will give you list item randomly. Then you choose to do it or just get another item.
-# command available
+<p align="center">
+<h3 align="center">m2-list</h3>
+<p align="center">It is a small todo-list application.</p>
+</p>
+
+## Idea
+  When I start to work, there are so many things appearing in my mind. I just write them down and continue my work. After doing that, I have a list. And this application helps me record such things and give me one randomly to do. Then I choose to do it or just get another list item.
+
+## Quick-start
+- You can [download the Windows release](https://github.com/ginhton/m2-list/releases/download/v0.1/m2-windows.exe).
+- You can [download the Linux release](https://github.com/ginhton/m2-list/releases/download/v0.1/m2-linux.AppImage).
+- Clone the repo: `git clone https://github.com/ginhton/m2-list.git`
+
+## Commands available
 * `add something-to-do`: this will add something to the whole list.
 * `list`: this will list all the things your list.
 * `clear`: clear all the things that appears in your list.
@@ -11,8 +19,4 @@ When you start to work, there are so many things appear in your mind. So you can
 * `done`: this will mark the item you *get* before done, and remove that item from your list.
 * `save`: save current list. And you can close this application.
 * `restore`: restore list if you saved list before.
-# how to build
-* first, you can clone this repo.
-* Then, you enter that directory, and run "yarn".
-* Then, you run "yarn build" to get distribute version.
-* Or you can run "yarn start" to run directly.
+* `quit`: quit.

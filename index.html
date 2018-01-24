@@ -2,15 +2,19 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/papercss@1.4.1/dist/paper.min.css">
     <title>2 Min App</title>
 <style type="text/css">
-html,body { padding: 0px; margin: 0px; height: 100%; }
+html,body { padding: 0px; margin: 0px; height: 100%; width: 100%; }
 body {
     -webkit-app-region: drag;
     overflow: hidden;
-    background-color: rgba(255, 120, 192, 0.3);
+    /* background-color: rgba(255, 120, 192, 0.3); */
+    background-color: white;
 }
 #container {
+    width: 100%;
     margin: 0px;
     height:100%;
 }
@@ -20,8 +24,8 @@ h2 {
     padding-top: 34px;
 }
 #title {
-    color: white;
-    font-size: 2.6em;
+    color: gray;
+    font-size: 2.1em;
     text-align: center;
 }
 
@@ -57,19 +61,24 @@ input:focus {
     border-radius: 2%;
     font-size: 1.8em;
 }
+li {
+    font-size: 20px;
+}
 </style>
   </head>
-  <body>
+  <body class="card">
     <!-- All of the Node.js APIs are available in this renderer process. -->
-    <div id="container">
-    <h2 id="title"> 2 Min APP </h2>
-    <ul id="list">
-    </ul>
-    <div id="input-area">
-        <input type="text" id="command" />
+    <div id="container" class="paper container">
+        <div class="card">
+            <div class="card-body">
+            <h2 id="title" class="card-title"> 2 Min APP </h2>
+            <ul id="list">
+            </ul>
+            <div id="input-area">
+                <input type="text" id="command" />
+            </div>
+        </div>
     </div>
-    </div>
-
     <script>
       // You can also require other files to run in this process
         require('./renderer.js')

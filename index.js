@@ -125,13 +125,14 @@ function help() {
     show("clear: remove all the items in your list")
     show("save: save current list in local storage")
     show("restore: restore list from local storage. This will override current list.")
+    show("quit: close current window.")
     current = -1
 }
 
 function nothing() {
     // nothing here
     clearAndShow("invalid command..");
-    console.log("nothing happened");
+    // console.log("nothing happened");
 }
 
 function clearAndShow(item) {
