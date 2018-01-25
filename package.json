@@ -26,7 +26,11 @@
     "win": {
         "target": [
             "nsis"
-        ]
+        ],
+      "icon": "./icon.ico"
+    },
+    "mac": {
+      "icon": "./icon.icns"
     }
   },
   "author": "ginhton",
