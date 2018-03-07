@@ -1,13 +1,22 @@
 var items = [];
-var command = "";
 var current = -1;
-var btn = document.getElementById("btn");
 var commandNode = document.getElementById("command");
+var handlers = {
+  "add": add,
+  "list": list,
+  "done": done,
+  "get": get,
+  "save": save,
+  "restore": restore,
+  "clear": clear,
+  "help": help,
+  "quit": quit
+};
 
 const remote = require('electron').remote;
 
 
-// configeration parameters
+// configuration parameters
 var STORAGE_SUPPORT = false;
 
 
@@ -19,57 +28,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function key (e) {
     if (e.keyCode == 13) {
-        // run
         extractCommand();
-        commandNode.value = "";
     }
 }
 
-function run() {
-    btn.addEventListener("click", extractCommand);
-}
-
 function extractCommand() {
-
     var command = commandNode.value;
     commandNode.value = "";
 
     var arr = command.split(" ");
     var com = arr.shift();
-    // alert(com);
-    switch(com) {
-        case "add":
-            var item = arr.join(" ");
-            add(item);
-            break;
-        case "list":
-            list();
-            break;
-        case "done":
-            done();
-            break;
-        case "get":
-            get();
-            break;
-        case "save":
-            save();
-            break;
-        case "restore":
-            restore();
-            break;
-        case "clear":
-            clear();
-            break;
-        case "quit":
-            quit();
-            break;
-        case "help":
-            help();
-            break;
-        default:
-            nothing();
-    }
-
+    handlers.hasOwnProperty(com) ? handlers[com](arr.join(" ")) : nothing();
 }
 
 
@@ -80,64 +49,76 @@ function add(item) {
 }
 
 function list() {
-    current = -1;
-    clearUl();
-    if (items.length <= 0) {
-        show("nothing left.")
-        return;
-    }
-    for(var idx in items) {
-        show(items[idx]);
-    }
+    clearAndShow(items.length <= 0 ? "nothing left" : items)
 }
 
 function get() {
-    clearUl();
     var item = "nothing left."
     if (items.length > 0) {
         current = Math.floor(Math.random()*items.length);
         item = items[current];
     }
+    clearUl();
     show(item);
 }
 
 function done(item) {
-    // item.done();
-    clearUl();
     if (current < -1 || current >= items.length) return;
     items.splice(current, 1);
-    current = -1;
     clearAndShow("item has been done.");
 }
 
 function quit() {
-    var window = remote.getCurrentWindow();
-    window.close();
+    remote.getCurrentWindow().close();
 }
 
 function help() {
-    clearUl();
-    show("help: show command usage")
-    show("add task: task can be something like 'drink water' or 'listen to music' (without quotes)")
-    show("list: get a list of what you added before")
-    show("get: randomly choose one item from list and display. you can rerun `get` to change current item.")
-    show("done: mark current item done and remove it from list")
-    show("clear: remove all the items in your list")
-    show("save: save current list in local storage")
-    show("restore: restore list from local storage. This will override current list.")
-    show("quit: close current window.")
-    current = -1
+    clearAndShow([
+        "help: show command usage",
+        "add task: task can be something like 'drink water' or 'listen to music' (without quotes)",
+        "list: get a list of what you added before",
+        "get: randomly choose one item from list and display. you can rerun `get` to change current item.",
+        "done: mark current item done and remove it from list",
+        "clear: remove all the items in your list",
+        "save: save current list in local storage",
+        "restore: restore list from local storage. This will override current list.",
+        "quit: close current window."
+    ]);
+}
+
+// local storage
+function save () {
+    if (STORAGE_SUPPORT) {
+        saveInLocal(items);
+        clearAndShow("data are saved");
+    } else {
+        clearAndShow("save is not supported");
+    }
+}
+
+function restore () {
+    if (STORAGE_SUPPORT) {
+        items = restoreFromLocal();
+        clearAndShow("data are restored");
+    } else {
+        clearAndShow("restore is not supported");
+    }
+}
+
+function clear () {
+    items = [];
+    clearAndShow("data are cleared");
 }
 
 function nothing() {
-    // nothing here
     clearAndShow("invalid command..");
-    // console.log("nothing happened");
 }
 
+// util functions
 function clearAndShow(item) {
+    current = -1
     clearUl();
-    show(item);
+    Array.isArray(item)? item.forEach(show) : show(item);
 }
 
 function show(item) {
@@ -151,40 +132,11 @@ function clearUl() {
     var ul = document.getElementById("list");
     removeChildren(ul);
 }
+
 function removeChildren(node) {
     while (node.hasChildNodes()) {
         node.removeChild(node.lastChild);
     }
-}
-
-
-
-// local storage
-function save () {
-    if (STORAGE_SUPPORT) {
-        current = -1;
-        clearUl();
-        saveInLocal(items);
-        clearAndShow("data are saved");
-    } else {
-        clearAndShow("save is not supported");
-    }
-}
-
-function restore () {
-    if (STORAGE_SUPPORT) {
-        current = -1;
-        clearUl();
-        items = restoreFromLocal();
-        clearAndShow("data are restored");
-    } else {
-        clearAndShow("restore is not supported");
-    }
-}
-
-function clear () {
-    items = [];
-    clearAndShow("data are cleared");
 }
 
 function saveInLocal (items) {
